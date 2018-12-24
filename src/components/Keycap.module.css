@@ -1,0 +1,47 @@
+.Keycap {
+  background-color: rgb(255, 249, 215);
+  border-top: 0.25rem solid rgb(237, 221, 188);
+  border-right: 0.4rem solid rgb(217, 201, 168);
+  border-bottom: 0.4rem solid rgb(184, 170, 142);
+  border-left: 0.4rem solid rgb(217, 201, 168);
+  border-radius: 0.2rem;
+  padding: 0.35rem 0.35rem 0.75rem 0.35rem;
+  min-width: 3rem;
+  text-align: left;
+  color: rgb(110, 103, 88);
+  font-size: 1rem;
+  margin: 0.15rem;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.Keycap:hover,
+.Keycap:focus {
+  background-color: rgb(235, 229, 195);
+  border-top-color: rgb(217, 201, 168);
+  border-right-color: rgb(197, 181, 148);
+  border-bottom-color: rgb(164, 150, 122);
+  border-left-color: rgb(197, 181, 148);
+  color: rgb(90, 83, 68);
+}
+
+.Reset {
+  background-color: rgb(84, 64, 49);
+  border-top-color: rgb(72, 53, 40);
+  border-right-color: rgb(71, 53, 39);
+  border-bottom-color: rgb(71, 53, 39);
+  border-left-color: rgb(72, 53, 40);
+  color: rgb(203, 195, 172);
+}
+
+.Reset:hover,
+.Reset:focus {
+  background-color: rgb(74, 54, 39);
+  border-top-color: rgb(62, 43, 30);
+  border-right-color: rgb(61, 43, 29);
+  border-bottom-color: rgb(61, 43, 29);
+  border-left-color: rgb(62, 43, 30);
+  color: rgb(193, 185, 162);
+}
+
