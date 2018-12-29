@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Keycap from './Keycap';
+import Keycap from '../Keycap/Keycap';
 import classes from './Guesses.module.css';
 
 class Guesses extends Component {

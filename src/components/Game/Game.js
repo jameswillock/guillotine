@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import word from '../utilities/words';
-import Guesses from './Guesses';
-import statuses from '../utilities/statuses';
+import word from '../../utilities/words';
+import Guesses from '../Guesses/Guesses';
+import statuses from '../../utilities/statuses';
 import classes from './Game.module.css';
 import Typed from 'typed.js';
 
