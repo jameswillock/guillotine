@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
     "jest-dom": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.2",
     "react-testing-library": "^5.4.2",
-    "typed.js": "^2.0.9"
+    "typed.js": "^2.0.9",
+    "typescript": "^3.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

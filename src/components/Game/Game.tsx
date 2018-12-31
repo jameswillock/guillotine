@@ -1,22 +1,44 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import word from '../../utilities/words';
 import Guesses from '../Guesses/Guesses';
-import statuses from '../../utilities/statuses';
 import classes from './Game.module.css';
 import Typed from 'typed.js';
 
-class Game extends Component {
+interface State {
+  guesses: Set<string>,
+  solution: string,
+  status: Status
+}
+
+enum Status {
+  InProgress,
+  Failed,
+  Suceeded
+}
+
+export default class Game extends PureComponent<{}, State> {
   static allowedIncorrectGuesses = 7;
+
+  typed?: Typed;
+  statusElement?: any;
 
   state = {
     guesses: new Set(),
     solution: word(),
-    status: statuses.IN_PROGRESS, 
+    status: Status.InProgress, 
   };
 
-  setupTyped = () => new Typed(this.statusElement, {
-    strings: [this.displayStatus()]
-  });
+  setStatusRef = (element: HTMLSpanElement) => {
+    this.statusElement = element;
+  };
+
+  setupTyped = () => {
+    if (!this.statusElement) return;
+
+    return new Typed(this.statusElement, {
+      strings: [this.displayStatus()]
+    });
+  };
 
   componentWillUnmount() {
     if (this.typed) this.typed.destroy();
@@ -26,7 +48,7 @@ class Game extends Component {
     this.typed = this.setupTyped();
   }
 
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate(_: {}, prevState: State) {
     if (this.typed) this.typed.destroy();
 
     this.typed = this.setupTyped();
@@ -42,10 +64,10 @@ class Game extends Component {
     }
   };
 
-  status = () => {
-    if (this.hasFailed()) return statuses.FAILED;
-    if (this.hasSucceeded()) return statuses.SUCCEEDED;
-    return statuses.IN_PROGRESS;
+  status = ()  => {
+    if (this.hasFailed()) return Status.Failed;
+    if (this.hasSucceeded()) return Status.Suceeded;
+    return Status.InProgress;
   }
 
   hasSucceeded = () => {
@@ -59,8 +81,8 @@ class Game extends Component {
     return this.incorrectGuesses().length >= Game.allowedIncorrectGuesses;
   };
 
-  guessClickHandler = (letter) => {
-    if (this.state.status !== statuses.IN_PROGRESS) return;
+  guessClickHandler = (letter: string) => {
+    if (this.state.status !== Status.InProgress) return;
 
     this.setState(prevState => {
       const guesses = new Set(prevState.guesses).add(letter);
@@ -72,7 +94,7 @@ class Game extends Component {
     this.setState({
       guesses: new Set(),
       solution: word(),
-      status: statuses.IN_PROGRESS
+      status: Status.InProgress
     });
   };
 
@@ -84,9 +106,9 @@ class Game extends Component {
 
   displayStatus = () => {
     switch (this.state.status) {
-      case statuses.SUCCEEDED:
+      case Status.Suceeded:
         return "Congratulations, you guessed correctly!";
-      case statuses.FAILED:
+      case Status.Failed:
         return `You failed. The answer was <strong>${this.state.solution}</strong>.`;
       default:
         return `<strong>${this.guessesRemaining()}</strong> guesses remaining.`;
@@ -99,7 +121,9 @@ class Game extends Component {
     );
   };
 
-  guessesRemaining = () => Game.allowedIncorrectGuesses - this.incorrectGuesses().length;
+  guessesRemaining = () => {
+    return Game.allowedIncorrectGuesses - this.incorrectGuesses().length;
+  }
 
   render() {
     return (
@@ -108,16 +132,13 @@ class Game extends Component {
           {this.displaySolution()}
         </div>
         <div className={classes.Info}>
-          <span ref={(element) => { this.statusElement = element; }}></span>
+          <span ref={this.setStatusRef}></span>
         </div>
-        <div className={classes.Keyboard}>
+        <div>
           <Guesses guessClickHandler={this.guessClickHandler}
-            resetClickHandler={this.resetClickHandler}
-            guessed={this.state.guesses} />
+            resetClickHandler={this.resetClickHandler} />
         </div>
       </div>
     );
   }
 }
-
-export default Game;

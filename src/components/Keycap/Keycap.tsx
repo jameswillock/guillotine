@@ -1,8 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent, SyntheticEvent } from 'react';
 import classes from './Keycap.module.css';
 
-class Keycap extends Component {
+interface Props {
+  letter: string,
+  reset: boolean,
+  handler: (event: React.MouseEvent<HTMLButtonElement>) => void
+};
+
+export default class Keycap extends PureComponent<Props> {
+  static defaultProps = {
+    reset: false
+  };
+
   render() {
     const classNames = [classes.Keycap];
     if (this.props.reset) classNames.push(classes.Reset);
@@ -14,10 +23,3 @@ class Keycap extends Component {
     );
   }
 }
-
-Keycap.propTypes = {
-  letter: PropTypes.string.isRequired,
-  handler: PropTypes.func.isRequired
-};
-
-export default Keycap;
