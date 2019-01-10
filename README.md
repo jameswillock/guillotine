@@ -1,1 +1,1 @@
-[![CircleCI](https://circleci.com/gh/niceguyjames/guillotine.svg?style=svg)](https://circleci.com/gh/niceguyjames/guillotine)
+[![CircleCI](https://circleci.com/gh/jameswillock/guillotine.svg?style=svg)](https://circleci.com/gh/jameswillock/guillotine)
