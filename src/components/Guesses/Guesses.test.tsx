@@ -1,6 +1,6 @@
 import React from 'react';
 import Guesses from './Guesses';
-import { render, cleanup, fireEvent, getByText } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import 'jest-dom/extend-expect';
 
 afterEach(cleanup);
@@ -8,8 +8,7 @@ afterEach(cleanup);
 test('It renders Keycaps for each character', () => {
   const { getByText } = render(
     <Guesses guessClickHandler={() => true}
-      resetClickHandler={() => true}
-      guessed={new Set()} />
+      resetClickHandler={() => true} />
   );
 
   const letters = [
