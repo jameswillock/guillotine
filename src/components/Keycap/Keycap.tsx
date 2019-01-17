@@ -1,4 +1,4 @@
-import React, { PureComponent, SyntheticEvent } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './Keycap.module.css';
 
 interface Props {
@@ -8,9 +8,7 @@ interface Props {
 }
 
 export default class Keycap extends PureComponent<Props> {
-  static defaultProps = {
-    reset: false
-  }
+  static defaultProps = { reset: false }
 
   render() {
     const classNames = [classes.Keycap]

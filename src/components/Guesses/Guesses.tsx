@@ -1,10 +1,11 @@
-import React, { PureComponent, ReactElement } from 'react';
+import React, { PureComponent } from 'react';
 import Keycap from '../Keycap/Keycap';
 import classes from './Guesses.module.css';
+import { guessAction, resetAction } from '../../store/guesses/actions'
 
 interface Props {
-  guessClickHandler: (letter: string) => void
-  resetClickHandler: () => void
+  guessClickHandler: typeof guessAction
+  resetClickHandler: typeof resetAction
 }
 
 export default class Guesses extends PureComponent<Props> {
@@ -25,6 +26,6 @@ export default class Guesses extends PureComponent<Props> {
       if (index === Guesses.layout.length - 1) characters.push(this.resetKeycap())
   
       return <div key={index} className={classes.Guesses}>{characters}</div>
-    });
+    })
   }
 }
