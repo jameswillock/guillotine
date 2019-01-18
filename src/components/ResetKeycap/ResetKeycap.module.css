@@ -1,0 +1,27 @@
+.ResetKeycap {
+  background-color: rgb(84, 64, 49);
+  border-top: 0.25rem solid rgb(72, 53, 40);
+  border-right: 0.4rem solid rgb(71, 53, 39);
+  border-bottom: 0.4rem solid rgb(71, 53, 39);
+  border-left: 0.4rem solid rgb(72, 53, 40);
+  border-radius: 0.2rem;
+  padding: 0.35rem 0.35rem 0.75rem 0.35rem;
+  min-width: 3rem;
+  text-align: left;
+  color: rgb(203, 195, 172);
+  font-size: 1rem;
+  margin: 0.15rem;
+  cursor: pointer;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.ResetKeycap:hover,
+.ResetKeycap:focus {
+  background-color: rgb(74, 54, 39);
+  border-top-color: rgb(62, 43, 30);
+  border-right-color: rgb(61, 43, 29);
+  border-bottom-color: rgb(61, 43, 29);
+  border-left-color: rgb(62, 43, 30);
+  color: rgb(193, 185, 162);
+}
