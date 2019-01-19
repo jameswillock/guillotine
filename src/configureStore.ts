@@ -1,4 +1,11 @@
-import { Store, createStore } from 'redux'
+import { Store, createStore, applyMiddleware } from 'redux'
 import { ApplicationState, rootReducer } from './store'
+import logger from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-export default (): Store<ApplicationState> => createStore(rootReducer)
+export default (): Store<ApplicationState> => createStore(
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(logger)
+  )
+)
