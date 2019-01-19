@@ -5,8 +5,8 @@ interface ResetKeycapProps {
   handler: (event: React.MouseEvent) => any
 }
 
-export default (props: ResetKeycapProps) => {
+export default React.memo((props: ResetKeycapProps) => {
   return (
     <button onClick={props.handler} className={classes.ResetKeycap}>Reset</button>
   )
-}
+})

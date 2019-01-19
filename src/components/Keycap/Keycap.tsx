@@ -6,8 +6,8 @@ interface KeycapProps {
   handler: (event: React.MouseEvent) => any
 }
 
-export default (props: KeycapProps) => {
+export default React.memo((props: KeycapProps) => {
   return (
     <button onClick={props.handler} className={classes.Keycap}>{props.letter}</button>
   )
-}
+})

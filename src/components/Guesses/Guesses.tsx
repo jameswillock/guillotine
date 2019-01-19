@@ -10,8 +10,7 @@ interface GuessesProps {
   resetClickHandler: typeof resetAction
 }
 
-export default (props: GuessesProps) => {
-
+export default React.memo((props: GuessesProps) => {
   const layout: Array<Array<string>> = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
@@ -22,12 +21,14 @@ export default (props: GuessesProps) => {
     const characters = row.map(letter =>
       <Keycap key={letter} letter={letter} handler={() => props.guessClickHandler(letter)} />
     )
-    
+
     // Append reset button to end of last row
-    if (index === layout.length - 1) characters.push(<ResetKeycap key="reset" handler={props.resetClickHandler} />)
-  
+    if (index === layout.length - 1) {
+      characters.push(<ResetKeycap key="reset" handler={props.resetClickHandler} />)
+    }
+
     return <div key={index} className={classes.Guesses}>{characters}</div>
   })
 
   return <>{keycaps}</>
-}
+})
