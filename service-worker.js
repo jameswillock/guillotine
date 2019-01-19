@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/guillotine/precache-manifest.0442be6f6c6426a1b894da38140fc80a.js"
+  "/guillotine/precache-manifest.c5e180ac863e6259b3e7f5629f67524c.js"
 );
 
 workbox.clientsClaim();
