@@ -1,25 +1,21 @@
-import React, { PureComponent } from 'react'
-import Guesses from '../../components/Guesses/Guesses'
-import classes from './Game.module.css'
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
-import { guessAction, resetAction } from '../../store/guesses/actions'
-import { ApplicationState } from '../../store'
-import { GuessesState } from '../../store/guesses/types'
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Dispatch } from "redux"
+import Guesses from "../../components/Guesses/Guesses"
+import { IApplicationState } from "../../store"
+import { guessAction, resetAction } from "../../store/guesses/actions"
+import { IGuessesState } from "../../store/guesses/types"
+import classes from "./Game.module.css"
 
-interface DispatchProps {
+interface IDispatchProps {
   resetClickHandler: typeof resetAction
   guessClickHandler: typeof guessAction
 }
 
-type Props = GuessesState & DispatchProps
+type Props = IGuessesState & IDispatchProps
 
-class Game extends PureComponent<Props> {
-  displaySolution = () => Array.from(this.props.solution).map(character => 
-    this.props.guesses.has(character) ? character : '_'
-  ).join('')
-
-  render() {
+export class Game extends PureComponent<Props> {
+  public render() {
     return (
       <div className={classes.Game}>
         <div className={classes.Solution}>
@@ -29,23 +25,29 @@ class Game extends PureComponent<Props> {
           {this.props.status}
         </div>
         <div>
-          <Guesses guessClickHandler={this.props.guessClickHandler}
-            resetClickHandler={this.props.resetClickHandler} />
+          <Guesses
+            guessClickHandler={this.props.guessClickHandler}
+            resetClickHandler={this.props.resetClickHandler}
+          />
         </div>
       </div>
     )
   }
+
+  private displaySolution = () => Array.from(this.props.solution).map((character) =>
+    this.props.guesses.has(character) ? character : "_"
+  ).join("")
 }
 
-const mapStateToProps = ({ guesses }: ApplicationState) => ({
-  guesses: guesses.guesses, 
+const mapStateToProps = ({ guesses }: IApplicationState) => ({
+  guesses: guesses.guesses,
   solution: guesses.solution,
   status: guesses.status
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  resetClickHandler: () => dispatch(resetAction()),
-  guessClickHandler: (letter: string) => dispatch(guessAction(letter))
+  guessClickHandler: (letter: string) => dispatch(guessAction(letter)),
+  resetClickHandler: () => dispatch(resetAction())
 })
 
 export default connect(

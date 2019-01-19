@@ -1,51 +1,55 @@
-import { Reducer } from 'redux';
-import { GuessesState, GuessesActionTypes } from './types'
-import word from '../../utilities/words'
+import { Reducer } from "redux"
+import word from "../../utilities/words"
+import { GuessesActionTypes, IGuessesState } from "./types"
 
-const allowedIncorrectGuesses = 7;
+const allowedIncorrectGuesses = 7
 
-const initialState: GuessesState = {
+const initialState: IGuessesState = {
   guesses: new Set(),
   solution: word(),
   status: `${allowedIncorrectGuesses} guesses remaining`
 }
 
 const hasWon = (solution: string, guesses: Set<string>) => {
-  return Array.from(solution).every(letter => guesses.has(letter))
+  return Array.from(solution).every((letter) => guesses.has(letter))
 }
 
 const hasLost = (solution: string, guesses: Set<string>) => {
-  return [...guesses].filter(character => !solution.includes(character)).length >= allowedIncorrectGuesses
+  return [...guesses].filter((character) => !solution.includes(character)).length >= allowedIncorrectGuesses
 }
 
-const reducer: Reducer<GuessesState> = (state = initialState, action) => {
+const reducer: Reducer<IGuessesState> = (state = initialState, action) => {
   switch (action.type) {
     case GuessesActionTypes.RESET:
       return { ...initialState, solution: word() }
-    case GuessesActionTypes.GUESS:   
+    case GuessesActionTypes.GUESS:
       // Return original state if guess is not new
-      if (state.guesses.has(action.payload)) return { ...state }
+      if (state.guesses.has(action.payload)) {
+        return { ...state }
+      }
 
       // Copy new `guesses` set
       const guesses = new Set(state.guesses).add(action.payload)
-      
+
+      let status: string
+
       // Determine if game is won or lost
       if (hasWon(state.solution, guesses)) {
-        const status = "Congratulations, you guessed correctly!"
-        return { ...state, guesses: guesses, status: status }
+        status = "Congratulations, you guessed correctly!"
+        return { ...state, guesses, status }
       } else if (hasLost(state.solution, guesses)) {
-        const status = `You failed. The answer was ${state.solution}.`
-        return { ...state, guesses: guesses, status: status }
+        status = `You failed. The answer was ${state.solution}.`
+        return { ...state, guesses, status }
       }
 
       // Return state with new guesses
-      const incorrectGuessesRemaining = allowedIncorrectGuesses - [...guesses].filter(character => {
+      const incorrectGuessesRemaining = allowedIncorrectGuesses - [...guesses].filter((character) => {
         return !state.solution.includes(character)
       }).length
 
-      const status = `${incorrectGuessesRemaining} guesses remaining.`
+      status = `${incorrectGuessesRemaining} guesses remaining.`
 
-      return { ...state, guesses: guesses, status: status }
+      return { ...state, guesses, status }
     default:
       return state
   }

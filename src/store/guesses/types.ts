@@ -4,9 +4,8 @@ export enum GuessesActionTypes {
   OTHER = "OTHER"
 }
 
-export interface GuessesState {
+export interface IGuessesState {
   readonly guesses: ReadonlySet<string>
   readonly solution: string
   readonly status: string
 }
-

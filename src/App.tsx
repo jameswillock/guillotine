@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Game from './containers/Game/Game'
-import './App.css'
+import React, { Component } from "react"
+import "./App.css"
+import Game from "./containers/Game/Game"
 
 class App extends Component {
-  render() {
+  public render() {
     return <Game />
   }
 }

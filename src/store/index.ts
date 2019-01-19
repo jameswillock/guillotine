@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux'
-import guessesReducer from './guesses/reducer'
-import { GuessesState } from './guesses/types'
+import { combineReducers } from "redux"
+import guessesReducer from "./guesses/reducer"
+import { IGuessesState } from "./guesses/types"
 
-export interface ApplicationState {
-  guesses: GuessesState
+export interface IApplicationState {
+  guesses: IGuessesState
 }
 
-export const rootReducer = combineReducers<ApplicationState>({
+export const rootReducer = combineReducers<IApplicationState>({
   guesses: guessesReducer
 })
